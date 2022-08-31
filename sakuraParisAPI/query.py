@@ -2,6 +2,7 @@ import requests
 import json
 import re
 from entryClass import Entry
+import traceback
 
 # return [[Entry], nextPageMarker]
 
@@ -13,7 +14,7 @@ from entryClass import Entry
 # marker: (optional) Pagination marker, see above.
 # page & offset:　fetch a specific word from dict.
 
-def queryApi(word : str, dictionary : str, maxEntries = 40, type = 1, romaji = 0, marker = "", removeTags = True):
+def queryApi(word : str, dictionary : str, maxEntries = 40, type = 1, romaji = 0, marker = "", removeTags = True, removeFirstDef = True):
     url = "https://sakura-paris.org/dict/"
     params = {
         "api" : "1",
@@ -39,13 +40,13 @@ def queryApi(word : str, dictionary : str, maxEntries = 40, type = 1, romaji = 0
             responseObj = response.json()
 
             if isinstance(responseObj, list):
-                if removeTags:
-                    cleanText(responseObj)
+                if removeTags or removeFirstDef:
+                    cleanText(responseObj, removeTags, removeFirstDef)
                 result = [convertToEntryList(responseObj), ""]
 
             elif isinstance(responseObj, object):
-                if removeTags:
-                    cleanText(responseObj["words"])
+                if removeTags or removeFirstDef:
+                    cleanText(responseObj["words"], removeTags, removeFirstDef)
 
                 result = [convertToEntryList(responseObj["words"]), responseObj["nextPageMarker"]]
 
@@ -53,7 +54,7 @@ def queryApi(word : str, dictionary : str, maxEntries = 40, type = 1, romaji = 0
 
     except Exception as e :
         print("---EXCEPTION OCCURRED IN FUNCTION sakuraParisAPI.getEntries---")
-        print(e)
+        print(traceback.format_exc())
 
     return result
 
@@ -78,15 +79,33 @@ def convertToEntryList(dicList: list[Entry]):
     return result
 
 #returns output without tags
-def cleanText(input: list[dict]):
+def cleanText(input: list[dict], removeTags: bool, removeFirstDef: bool):
     for _ in input:
-        _["heading"] = clearTags(_["heading"])
-        _["text"] = clearTags(_["text"])
+        heading = _["heading"]
+        definition = _["text"]
+
+        if removeTags:
+            heading = clearTags(_["heading"])
+            definition = clearTags(_["text"])
+
+        if removeFirstDef:
+            definition = removeFirstLine(definition)
+
+        _["heading"] = heading
+        _["text"] = definition
 
 def clearTags(s: str):
     return re.sub(r'\[.*?\]', '', s)
 
-a = queryApi("か", "広辞苑", 3)[0]
+#removes first line of string
+def removeFirstLine(s: str):
+    i = 0
+    while s[i] != '\n' and i < len(s):
+        i += 1
+
+    return s[i:]
+
+a = queryApi("か", "広辞苑", 3, removeFirstDef = True)[0]
 
 for entry in a :
     print(entry.getHeading())

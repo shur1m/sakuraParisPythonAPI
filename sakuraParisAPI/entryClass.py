@@ -16,6 +16,3 @@ class Entry:
 
 	def getOffset(self):
 		return self._offset
-
-	def setDefinition(self, newDef):
-		self._definition = newDef

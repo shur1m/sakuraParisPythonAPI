@@ -78,7 +78,7 @@ def convertToEntryList(dicList: list[Entry]):
 
     return result
 
-#returns output without tags
+#returns output without tags and or duplicate line in definition
 def cleanText(input: list[dict], removeTags: bool, removeFirstDef: bool):
     for _ in input:
         heading = _["heading"]
@@ -94,6 +94,7 @@ def cleanText(input: list[dict], removeTags: bool, removeFirstDef: bool):
         _["heading"] = heading
         _["text"] = definition
 
+#uses regex to clear tags
 def clearTags(s: str):
     return re.sub(r'\[.*?\]', '', s)
 

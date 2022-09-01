@@ -1,7 +1,12 @@
 # The Unofficial Sakura Paris Python API (TUSPPAPI)
 ✨ *Because one dictionary is never enough* ✨
 
-## What this wrapper can do
+### Table of Contents
+* [More than just a wrapper (Intro)](https://github.com/shur1m/sakuraParisPythonAPI/edit/main/README.md#more-than-just-a-wrapper)
+* [Install the Package](https://github.com/shur1m/sakuraParisPythonAPI/edit/main/README.md#install-the-package)
+* [Documentation](https://github.com/shur1m/sakuraParisPythonAPI/edit/main/README.md#documentation)
+
+## More than just a wrapper
 Have you ever wanted to search 40 different Japanese dictionaries at the same time? Well now you can anyways!
 
 Introducing the wrapper that queries the [sakura-paris](https://sakura-paris.org/About/%E5%BA%83%E8%BE%9E%E8%8B%91%E7%84%A1%E6%96%99%E6%A4%9C%E7%B4%A2)'s free Koujien search API（広辞苑無料検索） for a lot of dictionaries. This includes Daijirin, Koujien, Daijisen, and even oddballs like a dictionary for psychological terms（心理学辞典）.
@@ -50,7 +55,7 @@ a.addAllDict()
 ```
 and voila. 40 dictionaries at your fingertips. Minus a couple cause the API returns empty jsons for them. :')
 
-## Download
+## Install the Package
 This package can be downloaded using PIP! <br>
 Here is the command for the latest version: `pip install sakuraParisAPI==0.1.0` <br>
 SPPAPI has two dependencies: bs4 and requests, and both will also be installed by the above command

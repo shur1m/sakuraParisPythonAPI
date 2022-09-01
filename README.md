@@ -53,7 +53,7 @@ Also, by adding a single line before calling `search(word)`, we can query all di
 ```python
 a.addAllDict()
 ```
-and voila. 40 dictionaries at your fingertips. Minus a couple cause the API returns empty jsons for them. :')
+and ***voila***. 40 dictionaries at your fingertips. Minus a couple cause the API returns empty jsons for them. :')
 
 ## Install the Package
 This package can be downloaded using PIP! <br>

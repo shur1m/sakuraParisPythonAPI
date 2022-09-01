@@ -1,10 +1,11 @@
 import requests
 import json
 import re
-from entryClass import Entry
+from sakuraParisAPI.entryClass import Entry
 import traceback
 
-# return [[Entry], nextPageMarker]
+# returns [[Entry], nextPageMarker] or None if api call failed
+# returns empty array if api returned nothing
 
 # q: search keyword（UTF-8 urlencode）
 # dict: dictionary name（UTF-8 urlencode）
@@ -14,7 +15,7 @@ import traceback
 # marker: (optional) Pagination marker, see above.
 # page & offset:　fetch a specific word from dict.
 
-def queryApi(word : str, dictionary : str, maxEntries = 40, type = 1, romaji = 0, marker = "", removeTags = True, removeFirstDef = True):
+def queryApi(word : str, dictionary : str, maxEntries = 40, type = 0, romaji = 0, marker = "", removeTags = True, removeFirstDef = True):
     url = "https://sakura-paris.org/dict/"
     params = {
         "api" : "1",
@@ -105,9 +106,3 @@ def removeFirstLine(s: str):
         i += 1
 
     return s[i:]
-
-a = queryApi("か", "広辞苑", 3, removeFirstDef = True)[0]
-
-for entry in a :
-    print(entry.getHeading())
-    print(entry.getDefinition())

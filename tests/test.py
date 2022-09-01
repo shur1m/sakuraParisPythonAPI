@@ -1,2 +1,6 @@
 from sakuraParisAPI import sakura
-sakura.printHello()
+
+a = sakura.tryQuery()
+
+for en in a[0]:
+    print(en.getHeading())

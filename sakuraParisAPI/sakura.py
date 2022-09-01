@@ -1,5 +1,67 @@
-#This file holds all functions that can be called
-from . import query
+#This file holds Sakura, which is the main port to the API
+from sakuraParisAPI.fetch import query
 
-def tryQuery():
-    return query.queryApi("元気", "広辞苑")
+class JpDict:
+    def __init__(self, maxEntries = 10, dictionaries = {"広辞苑"}):
+        self._maxEntries = maxEntries
+        self._dictionaries = dictionaries
+        self._removeTags = True
+
+    #returns a dictionary [key = dict name, value = list of Entry]
+    def search(self, word, searchType = 0):
+        result = {}
+
+        for dictionary in self._dictionaries:
+            result[dictionary] = query.askApi(word, dictionary, removeTags = self._removeTags, type = searchType)[0]
+
+        return result
+    
+    #same as default search
+    def startsWith(self, word):
+        return search(word)
+
+    #searches for words that end with word
+    def endsWith(self, word):
+        return search(self, word, searchType = 1)
+
+    #searches for complete matches
+    def completeMatch(self, word):
+        return search(self, word, searchType = 2)
+
+    #sets max number of entries returned for each search
+    def setMax(self, maxEntries):
+        self._maxEntries = maxEntries
+
+    #adds dictionary to list of dictionaries to be searched
+    def addDict(self, dictionaryName):
+        self._dictionaries.add(dictionaryName)
+
+    #adds all possible dictionaries to active dictionaries
+    def addAllDict(self):
+        self._dictionaries.update(self.getAllDict())
+
+    #removes dictionary from dictionaries to be searched
+    def removeDict(self, dictionaryName):
+        if dictionaryName in self._dictionaries:
+            self._dictionaries.remove(dictionaryName)
+
+    #disables all dictionaries
+    def clearDict(self):
+        self._dictionaries.clear()
+
+    #returns all active dictionaries as a list
+    def getDict(self):
+        return list(self._dictionaries)
+
+    def getAllDict(self):
+        return query.getAllDict()
+
+    #leaves markdown tags in output
+    def enableTags(self):
+        self._removeTags = False
+
+    #removes markdown tags from output
+    def disableTags(self):
+        self._removeTags = True
+
+    

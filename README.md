@@ -57,7 +57,7 @@ and ***voila***. 40 dictionaries at your fingertips. Minus a couple cause the AP
 
 ## Install the Package
 This package can be downloaded using PIP! <br>
-Here is the command for the latest version: `pip install sakuraParisAPI==0.1.0` <br>
+Here is the command for the latest version: `pip install sakuraParisAPI==0.1.1` <br>
 SPPAPI has two dependencies: bs4 and requests, and both will also be installed by the above command
 
 ## Documentation

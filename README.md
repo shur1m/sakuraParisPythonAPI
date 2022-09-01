@@ -63,10 +63,10 @@ Please note that the API does not work with a few dictionaries (e.g. 学研古�
 
 | JpDict Method | Parameter Types | Return Type | Description | 
 |-|-|-|-|
-| `search(word, searchType = 0)` | str, int (0 - 2) | dict[str, list[str]] | queries active dictionaries for `word` with search type `searchType`. `searchtype = 0` by default and searches for dictionary entries with prefixes matching `word`. `searchtype = 1` searches for suffixes matching `word` and `searchtype = 2` searches for exact matches only. <br> Returns a dictionary where keys are the name of the dictionary queried and value is a list of `Entry`|
-| `startsWith(word)` | str | dict[str, list[str]] | Queries dictionary for entries that start with `word`. Same return type as `search`.|
-| `endsWith(word)` | str | dict[str, list[str]] | Queries dictionary for entries that end with `word`. Same return type as `search`.|
-| `completeMatch(word)` | str | dict[str, list[str]] | Queries dictionary for entries that are exact matches for `word`. Same return type as `search`.|
+| `search(word, searchType = 0)` | str, int (0 - 2) | dict[str, list[Entry]] | queries active dictionaries for `word` with search type `searchType`. `searchtype = 0` by default and searches for dictionary entries with prefixes matching `word`. `searchtype = 1` searches for suffixes matching `word` and `searchtype = 2` searches for exact matches only. <br> Returns a dictionary where keys are the name of the dictionary queried and value is a list of `Entry`|
+| `startsWith(word)` | str | dict[str, list[Entry]] | Queries dictionary for entries that start with `word`. Same return type as `search`.|
+| `endsWith(word)` | str | dict[str, list[Entry]] | Queries dictionary for entries that end with `word`. Same return type as `search`.|
+| `completeMatch(word)` | str | dict[str, list[Entry]] | Queries dictionary for entries that are exact matches for `word`. Same return type as `search`.|
 | `setMax(maxEntries)` | int | void | Sets the max number of entries (for each dictionary) returned by any of the above functions to `maxEntries` |
 | `addDict(dictionaryName)` | str | void | adds `dictionaryName` to set of dictionaries to be queried if it exists. |
 | `addAllDict()` | | void | adds all possible dictionaries to set of dictionaries to be queried.|

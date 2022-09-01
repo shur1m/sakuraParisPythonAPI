@@ -2,9 +2,9 @@
 ✨ *Because one dictionary is never enough* ✨
 
 ### Table of Contents
-* [More than just a wrapper (Intro)](https://github.com/shur1m/sakuraParisPythonAPI/edit/main/README.md#more-than-just-a-wrapper)
-* [Install the Package](https://github.com/shur1m/sakuraParisPythonAPI/edit/main/README.md#install-the-package)
-* [Documentation](https://github.com/shur1m/sakuraParisPythonAPI/edit/main/README.md#documentation)
+* [More than just a wrapper (Intro)](https://github.com/shur1m/sakuraParisPythonAPI#more-than-just-a-wrapper)
+* [Install the Package](https://github.com/shur1m/sakuraParisPythonAPI#install-the-package)
+* [Documentation](https://github.com/shur1m/sakuraParisPythonAPI#documentation)
 
 ## More than just a wrapper
 Have you ever wanted to search 40 different Japanese dictionaries at the same time? Well now you can anyways!

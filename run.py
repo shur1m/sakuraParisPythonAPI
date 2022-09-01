@@ -1,16 +1,16 @@
 from sakuraParisAPI.sakura import JpDict
 
 a = JpDict()
+a.setMax(10)
+a.enableTags()
 
-a.addDict("大辞林")
-results = a.search("元気")
+results = a.endsWith("元気")
 
 for key in results:
     print("______", key, "______")
-    for en in results[key]:
-        print(en.getHeading())
-        print(en.getDefinition())
+    for entry in results[key]:
+        print(entry.getHeading())
+        print(entry.getDefinition())
 
+    print(len(results[key]))
     print()
-
-print(a.getDict())

@@ -4,8 +4,7 @@ import re
 from sakuraParisAPI.fetch.entryClass import Entry
 import traceback
 
-# returns Entries object or None if api call failed
-# returns empty Entries object if api returned nothing
+# returns [List of Entries, pagination token]
 
 # q: search keyword（UTF-8 urlencode）
 # dict: dictionary name（UTF-8 urlencode）
@@ -31,7 +30,7 @@ def askApi(word : str, dictionary : str, maxEntries = 40, type = 0, romaji = 0, 
     if marker != "":
         params["marker"] = marker
 
-    result = None
+    result = [[], ""]
 
     #try getting the api response and parse
     try:

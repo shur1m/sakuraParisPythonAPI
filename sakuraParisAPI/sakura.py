@@ -12,25 +12,47 @@ class JpDict:
         result = {}
 
         for dictionary in self._dictionaries:
-            result[dictionary] = query.askApi(word, dictionary, removeTags = self._removeTags, type = searchType)[0]
+            result[dictionary] = []
+            self._addEntries(result[dictionary], dictionary, word, searchType)
 
         return result
+
+    def _addEntries(self, curList, dictionary, word, searchType):
+        remaining = self._maxEntries
+        queryResult = query.askApi(word, dictionary,
+            removeTags = self._removeTags,
+            type = searchType,
+            maxEntries = min(remaining, 40))
+
+        curList.extend(queryResult[0])
+        remaining -= len(queryResult[0])
+
+        while remaining > 0 and queryResult[1] != "":
+            queryResult = query.askApi(word, dictionary,
+                removeTags = self._removeTags,
+                type = searchType,
+                marker = queryResult[1],
+                maxEntries = min(remaining, 40))
+            
+            curList.extend(queryResult[0])
+            remaining -= len(queryResult[0])
     
     #same as default search
     def startsWith(self, word):
-        return search(word)
+        return self.search(word)
 
     #searches for words that end with word
     def endsWith(self, word):
-        return search(self, word, searchType = 1)
+        return self.search(word, searchType = 1)
 
     #searches for complete matches
     def completeMatch(self, word):
-        return search(self, word, searchType = 2)
+        return self.search(word, searchType = 2)
 
     #sets max number of entries returned for each search
     def setMax(self, maxEntries):
-        self._maxEntries = maxEntries
+        if maxEntries >= 1:
+            self._maxEntries = maxEntries
 
     #adds dictionary to list of dictionaries to be searched
     def addDict(self, dictionaryName):

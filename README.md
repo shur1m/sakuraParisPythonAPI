@@ -75,9 +75,9 @@ Please note that the API does not work with a few dictionaries (e.g. 学研古�
 
 |Entry Method| Parameter Types | Return Type | Description |
 |-|-|-|-|
-|getHeading() | | str | returns heading listed in dictionary entry. |
-|getDefinition() | | str | returns the definition listed in dictionary entry. |
-|getPage() | | str | returns page number of dictionary entry |
-|getOffset() | | str | returns the offset of the dictionary entry |
+|`getHeading()` | | str | returns heading listed in dictionary entry. |
+|`getDefinition()` | | str | returns the definition listed in dictionary entry. |
+|`getPage()` | | str | returns page number of dictionary entry |
+|`getOffset()` | | str | returns the offset of the dictionary entry |
 
 Note: `getPage()` and `getOffset()` do not currently have any use.

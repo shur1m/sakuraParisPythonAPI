@@ -56,11 +56,28 @@ Here is the command for the latest version: `pip install sakuraParisAPI==0.0.9` 
 SPPAPI has two dependencies: bs4 and requests, and both will also be installed by the above command
 
 ## Documentation
-All public methods of the JpDict class are listed below. <br>
+All public methods of the JpDict and Entry class are listed below. <br>
 Please note that the API does not work with a few dictionaries (e.g. 学研古語辞典, NHK日本語発音アクセント辞典). I will be using bs4 or something similar to implement these features later. Especially for the NHK accent dictionary, I hope to return the links to the .wav files for each entry.
 
 <br>
 
-| JpDict Method Name | Parameter Types | Return Type | Description | 
+| JpDict Method | Parameter Types | Return Type | Description | 
 |-|-|-|-|
-| `search(word, searchType = 0)` | str, int (0 - 2) | dict[str, list[str]] | queries active dictionaries for `word` with search type `searchType`. `searchtype = 0` by default and searches for dictionary entries with prefixes matching `word`. `searchtype = 1` searches for suffixes matching `word` and `searchtype = 2` searches for exact matches only.|
+| `search(word, searchType = 0)` | str, int (0 - 2) | dict[str, list[str]] | queries active dictionaries for `word` with search type `searchType`. `searchtype = 0` by default and searches for dictionary entries with prefixes matching `word`. `searchtype = 1` searches for suffixes matching `word` and `searchtype = 2` searches for exact matches only. <br> Returns a dictionary where keys are the name of the dictionary queried and value is a list of `Entry`|
+| `startsWith(word)` | str | dict[str, list[str]] | Queries dictionary for entries that start with `word`. Same return type as `search`.|
+| `endsWith(word)` | str | dict[str, list[str]] | Queries dictionary for entries that end with `word`. Same return type as `search`.|
+| `completeMatch(word)` | str | dict[str, list[str]] | Queries dictionary for entries that are exact matches for `word`. Same return type as `search`.|
+| `setMax(maxEntries)` | int | void | Sets the max number of entries (for each dictionary) returned by any of the above functions to `maxEntries` |
+| `addDict(dictionaryName)` | str | void | adds `dictionaryName` to set of dictionaries to be queried if it exists. |
+| `addAllDict()` | | void | adds all possible dictionaries to set of dictionaries to be queried.|
+| `enableTags()` | | void | prevents markdown tags from being removed from the `heading` and `definition` fields of `Entry`s returned in searches. |
+| `disableTags()` | | void | ensures markdown tags are removed from the `heading` and `definition` fields of `Entry`s returned in searches. |
+
+|Entry Method| Parameter Types | Return Type | Description |
+|-|-|-|-|
+|`getHeading()` | | str | returns heading listed in dictionary entry. |
+|`getDefinition()` | | str | returns the definition listed in dictionary entry. |
+|`getPage()` | | str | returns page number of dictionary entry |
+|`getOffset()` | | str | returns the offset of the dictionary entry |
+
+Note: `getPage()` and `getOffset()` do not currently have any use.

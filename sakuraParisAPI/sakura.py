@@ -6,6 +6,7 @@ class JpDict:
         self._maxEntries = maxEntries
         self._dictionaries = dictionaries
         self._removeTags = True
+        self._allDicts = set(query.getAllDict())
 
     #returns a dictionary [key = dict name, value = list of Entry]
     def search(self, word, searchType = 0):
@@ -56,7 +57,8 @@ class JpDict:
 
     #adds dictionary to list of dictionaries to be searched
     def addDict(self, dictionaryName):
-        self._dictionaries.add(dictionaryName)
+        if dictionaryName in self._allDicts:
+            self._dictionaries.add(dictionaryName)
 
     #adds all possible dictionaries to active dictionaries
     def addAllDict(self):
@@ -75,8 +77,9 @@ class JpDict:
     def getDict(self):
         return list(self._dictionaries)
 
+    #return all possible dictionaries
     def getAllDict(self):
-        return query.getAllDict()
+        return self._allDicts
 
     #leaves markdown tags in output
     def enableTags(self):

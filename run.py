@@ -2,7 +2,7 @@ from sakuraParisAPI.sakura import JpDict
 
 a = JpDict()
 a.setMax(10)
-a.enableTags()
+a.addDict("大辞林")
 
 results = a.endsWith("元気")
 
@@ -14,3 +14,5 @@ for key in results:
 
     print(len(results[key]))
     print()
+
+print(a.getAllDict())

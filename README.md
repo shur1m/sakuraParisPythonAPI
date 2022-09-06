@@ -77,6 +77,8 @@ Please note that the API does not work with a few dictionaries (e.g. 学研古�
 | `addAllDict()` | | void | adds all possible dictionaries to set of dictionaries to be queried.|
 | `removeDict(dictionaryName)` | str | void | removes `dictionaryName` from the set of dictionaries to be queried if it exists. |
 | `clearDict()` | | void | removes all dictionaries from set of dictionaries to be queried. |
+| `getDict()` | | list(str) | returns a list of the names of all active dictionaries. |
+| `getAllDict()` | | set(str) | returns a set of the names of all possible dictionaries that can be queried. |
 | `enableTags()` | | void | prevents markdown tags from being removed from the `heading` and `definition` fields of `Entry`s returned in searches. |
 | `disableTags()` | | void | ensures markdown tags are removed from the `heading` and `definition` fields of `Entry`s returned in searches. |
 
